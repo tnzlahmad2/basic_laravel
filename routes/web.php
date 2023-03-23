@@ -6,13 +6,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\UniDbController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RequestController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\RequestController;
-use App\Http\Controllers\SessionController;
-
-
+use App\Http\Controllers\FileController;
 
 
 /*
@@ -73,7 +73,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('uniDb',[UniDbController::class , "uniDb"]);
 Route::get('student',[DbController::class , "getModel"]);
 
-
 Route::get('product',[SubjectController::class , "getData"]);
 Route::get('employee',[EmployeeController::class , "getEmployee"]);
 
@@ -86,3 +85,24 @@ Route::view('test',"test");
 
 Route::post('session',[SessionController::class , "flashSessions"]);
 Route::view('addUser',"flashSession");
+
+// Route::view('login',"login");
+Route::view('profile',"profile");
+Route::get('/logout', function () {
+     if(session()->has('user')){
+        session()->pull('user', null);
+     }
+     return redirect('login');
+ });
+
+ Route::get('/login', function () {
+     if(session()->has('user')){
+        return redirect('profile');
+     }
+     return view('login');
+ });
+
+Route::post('loginSession',[LoginController::class , "loginSession"]);
+
+Route::view('file',"UploadFile");
+Route::post('upload',[FileController::class , "fileUpload"]);

@@ -9,6 +9,10 @@ use App\Http\Controllers\UniDbController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\RequestController;
+use App\Http\Controllers\SessionController;
+
+
 
 
 /*
@@ -70,5 +74,15 @@ Route::get('uniDb',[UniDbController::class , "uniDb"]);
 Route::get('student',[DbController::class , "getModel"]);
 
 
-Route::get('subject',[SubjectController::class , "getData"]);
+Route::get('product',[SubjectController::class , "getData"]);
 Route::get('employee',[EmployeeController::class , "getEmployee"]);
+
+// Route::get('sub',[RequestController::class , "testRequest"]);
+// Route::post('sub',[RequestController::class , "testRequest"]);
+// Route::put('sub',[RequestController::class , "testRequest"]);
+
+Route::delete('sub',[RequestController::class , "testRequest"]);
+Route::view('test',"test");
+
+Route::post('session',[SessionController::class , "flashSessions"]);
+Route::view('addUser',"flashSession");

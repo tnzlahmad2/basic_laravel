@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
+
 use App\Http\Controllers\DbController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
@@ -44,7 +46,7 @@ use App\Http\Controllers\FileController;
 
 
 // Route::get('/',[UserController::class , "index"]);
-// Route::get('/about',[UserController::class , "about"]);
+// Route::get('/about', [UserController::class, "about"]);
 // Route::get('/services',[UserController::class , "services"]);
 
 // Route::get('/inner',[StudentController::class , "inner"]);
@@ -56,53 +58,60 @@ use App\Http\Controllers\FileController;
 // Route::post('/auth',[AuthController::class , "auth"]);
 
 
-Route::get('/', function () {
-     return view('index');
- });
+// Route::get('/', function () {
+//     return view('index');
+// });
 
-Route::view('auth',"auth");
-Route::view('check',"check")->middleware('protectedPage');
+// Route::view('auth', "auth");
+// Route::view('check', "check")->middleware('protectedPage');
 
 // Route::group(['middleware'=>['checkName']], function(){
 //    Route::view('check',"check");
 // });
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Auth::routes();
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// using for the model data connection
-Route::get('uniDb',[UniDbController::class , "uniDb"]);
-Route::get('student',[DbController::class , "getModel"]);
+// // using for the model data connection
+// Route::get('uniDb', [UniDbController::class, "uniDb"]);
+// Route::get('student', [DbController::class, "getModel"]);
 
-Route::get('product',[SubjectController::class , "getData"]);
-Route::get('employee',[EmployeeController::class , "getEmployee"]);
+// Route::get('product', [SubjectController::class, "getData"]);
+// Route::get('employee', [EmployeeController::class, "getEmployee"]);
 
 // Route::get('sub',[RequestController::class , "testRequest"]);
 // Route::post('sub',[RequestController::class , "testRequest"]);
 // Route::put('sub',[RequestController::class , "testRequest"]);
 
-Route::delete('sub',[RequestController::class , "testRequest"]);
-Route::view('test',"test");
+// Route::delete('sub', [RequestController::class, "testRequest"]);
+// Route::view('test', "test");
 
-Route::post('session',[SessionController::class , "flashSessions"]);
-Route::view('addUser',"flashSession");
+// Route::post('session', [SessionController::class, "flashSessions"]);
+// Route::view('addUser', "flashSession");
 
-// Route::view('login',"login");
-Route::view('profile',"profile");
-Route::get('/logout', function () {
-     if(session()->has('user')){
-        session()->pull('user', null);
-     }
-     return redirect('login');
- });
+// // Route::view('login',"login");
+// Route::view('profile', "profile");
+// Route::get('/logout', function () {
+//     if (session()->has('user')) {
+//         session()->pull('user', null);
+//     }
+//     return redirect('login');
+// });
 
- Route::get('/login', function () {
-     if(session()->has('user')){
-        return redirect('profile');
-     }
-     return view('login');
- });
+// Route::get('/login', function () {
+//     if (session()->has('user')) {
+//         return redirect('profile');
+//     }
+//     return view('login');
+// });
 
-Route::post('loginSession',[LoginController::class , "loginSession"]);
+// Route::post('loginSession', [LoginController::class, "loginSession"]);
 
-Route::view('file',"UploadFile");
-Route::post('upload',[FileController::class , "fileUpload"]);
+// Route::view('file', "UploadFile");
+// Route::post('upload', [FileController::class, "fileUpload"]);
+
+// Route::view('local', "profile");
+
+Route::get('/{lang?}', function ($lang = null) {
+    App::setlocale($lang);
+    return view('profile');
+});
